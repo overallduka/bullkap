@@ -10,6 +10,7 @@
                     <tr>
                         <th>Criado em</th>
                         <th>Titulo</th>
+                        <th>Envios</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -17,6 +18,7 @@
                         <tr>
                                 <td><%= to_date camp.created_at %></td>
                                 <td><%= camp.title %></td>
+                                <td><%= camp.sents_count %></td>
                                 <td></td>
                         </tr>
                     <% end %>
@@ -34,7 +36,7 @@
                     <tr>
                         <th>Criado em</th>
                         <th>Titulo</th>
-                        <th>Destinatarios</th>
+                        <th>Envios</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -42,6 +44,7 @@
                         <tr>
                             <td><%= to_date camp.created_at %></td>
                             <td><%= camp.title %></td>
+                            <td><%= camp.sents_count %></td>
                             <td><%= camp.people_list.sents_count if camp.people_list.present? %></td>
 
                             <td></td>

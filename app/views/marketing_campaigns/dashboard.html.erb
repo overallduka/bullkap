@@ -1,1 +1,62 @@
-dashboard.html.erb
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+
+
+      function drawChart() {
+        var have = <%= current_user.credits.to_i-@spent_credit.round(2) %>;
+        var spent =  <%= @spent_credit.round(2) %>;
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Credits Count'],
+          ['Crédito restante (R$ '+have+')', have],
+          ['Crédito gasto (R$ '+spent+')', spent]
+        ]);
+
+        var options = {
+          title: 'Créditos restantes'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+        }
+
+
+
+      google.setOnLoadCallback(drawChart1);
+        
+      function drawChart1() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Credits Count'],
+          ['Emails enviados (<%= @sent_email_count %>)', <%= @sent_email_count %>],
+          ['Sms enviados (<%= @sent_sms_count %>)', <%= @sent_sms_count %>]
+        ]);
+
+        var options = {
+          title: 'Emails e Sms enviados'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart-1'));
+
+        chart.draw(data, options);
+      }
+
+    </script>
+<div id='dashboard-wrapper'>
+     <div class='jumbotron'>
+         <h3>Dados desse mês</h3>
+        <ul>
+            <li>
+                <div id="piechart" style="width: 500px; height: 300px;"></div>
+            </li>
+            <li>
+                 <div id="piechart-1" style="width: 500px; height: 300px;"></div>
+            </li>
+        </ul>
+     </div>
+</div>
+
+    

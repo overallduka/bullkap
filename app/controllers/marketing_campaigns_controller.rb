@@ -1,7 +1,13 @@
 class MarketingCampaignsController < ApplicationController
 
 	def dashboard
-
+        spent_sms = MarketingCampaignSms.last_month.sum(:sents_count)
+        spent_sms = spent_sms*0.14
+        spent_email = MarketingCampaignEmail.last_month.sum(:sents_count)
+        spent_email = spent_email*0.05
+        @spent_credit = spent_sms+spent_email
+        @sent_sms_count = MarketingCampaignSms.last_month.count
+        @sent_email_count = MarketingCampaignEmail.last_month.count
 	end
 
 	def index
@@ -31,6 +37,7 @@ class MarketingCampaignsController < ApplicationController
         
         campaign =  MarketingCampaign.new marketing_campaign_params
         if campaign.valid?
+            campaign.sents_count = people_list.people.count
             campaign.people_list_id = people_list.id
             campaign.save
             flash[:notice] = 'Campanha criada e enviada com sucesso'

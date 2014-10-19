@@ -7,9 +7,14 @@ class MarketingCampaignSms < MarketingCampaign
         client = Twilio::REST::Client.new account_sid, auth_token
         
         people_list.people.each do |person|   
-            client.account.messages.create(from: '+18554933990', to: '+55'+person.cell_number, body: sms_content)
+            begin 
+                client.account.messages.create(from: '+18554933990', to: '+55'+person.cell_number, body: sms_content)
+            rescue => e
+                puts "Unable to sent: #{e}"
+            end
         end
-
+        
     end
 
+ 
 end

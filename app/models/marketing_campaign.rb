@@ -6,5 +6,6 @@ class MarketingCampaign < ActiveRecord::Base
     validates :title, presence: true
     
     scope :desc, -> { order('created_at desc') }
+    scope :last_month, -> { where('created_at > ?', 1.month.ago) }
 
 end

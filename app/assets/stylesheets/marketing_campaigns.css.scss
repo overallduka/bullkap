@@ -33,3 +33,15 @@
         }
     }
 }
+
+#dashboard-wrapper {
+
+    ul {
+        li {
+            display:inline-block;
+            #piechart, #piechart-1 {
+                display:inline-block;
+            }
+        }
+    }
+}
