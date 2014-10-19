@@ -1,0 +1,36 @@
+<style type="text/css">
+    #login-box {
+    width:400px;
+    margin: 0 auto;
+    background:white;
+    padding:20px;
+    box-shadow: 0px 2px 10px rgba(146, 146, 146, 0.28);
+    margin-top:50px;
+    }
+</style>
+<div id='login-box'>
+    
+<h2>Log in</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  
+  <div class="form-control-wrapper"><%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true,class: "form-control" %>
+  <span class="material-input"></span>
+  </div>
+
+  <div class="form-control-wrapper"><%= f.label :password, "Senha" %><br />
+      <%= f.password_field :password, autocomplete: "off",class: "form-control" %>
+  <span class="material-input"></span>
+    </div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="radio radio-primary"><%= f.check_box :remember_me %> <%= f.label :remember_me,"Relembrar minha senha ?" %></div>
+  <% end -%>
+
+  <div><%= f.submit "Log in",class: "btn btn-flat btn-primary withripple" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+
+</div>

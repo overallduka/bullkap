@@ -1,0 +1,35 @@
+// Place all the styles related to the marketing_campaigns controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#create_wrapper{
+    width:100%;
+    #sidebar {
+        width:25%;
+        float:left;
+        overflow:auto;
+    }
+    #content-wrapper {
+        width:72%;
+        float:right;
+    }
+    #people-wrapper {
+        max-height:300px;
+        overflow:auto;
+    }
+}
+#campaigns_wrapper {
+    .panel-heading {
+        h3 {
+            display:inline-block;
+        }
+        a {
+            color: #fff;
+            float: right;
+            vertical-align: top;
+            margin:0;
+            top:-7px;
+        }
+    }
+}

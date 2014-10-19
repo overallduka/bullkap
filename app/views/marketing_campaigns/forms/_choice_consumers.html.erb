@@ -1,0 +1,9 @@
+
+          <h5>Destinatários</h5>
+          <div id='people-wrapper'>
+              <%= p.collection_check_boxes :people, Person.all, :id, :name,:item_wrapper_class => 'inline' do |b| %>
+                <div class='checkbox'>
+                    <%= b.label { b.check_box + b.text } %>
+                </div>
+              <% end %>
+          </div>    

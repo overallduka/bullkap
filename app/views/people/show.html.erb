@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="large-2 columns">
+    <strong>Name:</strong>
+  </div>
+  <div class="large-10 columns">
+    <%= @person.name %>
+  </div>
+</div>
+
+<p>
+  <strong>Email:</strong>
+  <%= @person.email %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @person.phone_number %>
+</p>
+
+<p>
+  <strong>Cell number:</strong>
+  <%= @person.cell_number %>
+</p>
+
+<p>
+  <strong>Twitter:</strong>
+  <%= @person.twitter %>
+</p>
+
+<p>
+  <strong>Facebook:</strong>
+  <%= @person.facebook %>
+</p>
+
+<p>
+  <strong>Instagram:</strong>
+  <%= @person.instagram %>
+</p>
+
+<p>
+  <strong>Bond:</strong>
+  <%= @person.bond_id %>
+</p>
+
+<%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Back', people_path %>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Ulbra Call" %></title>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>  
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
+     <%#= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+      <% if user_signed_in? %>
+
+          <%= nav_bar :fixed => :top, :brand => "Ulbra Call", :brand_link => root_path,:responsive => true do %>
+              <%= menu_group do %>
+                <%= menu_item "Pessoas",people_path %>
+                <%= menu_item "Vinculos",bonds_path %>
+                <%= menu_item "Interesses",interests_path %>
+              <% end %>
+            <%= menu_group :pull => :right do %>
+                <%= menu_item "Campanhas de Marketing", marketing_campaigns_path,:active => true %>
+
+                    <%= drop_down current_user.email do %>
+                        <%= menu_item "Logout", destroy_user_session_path,method: :delete %>
+                    <% end %>
+            <% end %>
+          <% end %>
+
+  <% end %>
+
+      
+
+
+    <div id="content">
+    <%= render partial: 'layouts/notification_bar' %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

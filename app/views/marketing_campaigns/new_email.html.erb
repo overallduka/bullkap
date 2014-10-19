@@ -1,0 +1,121 @@
+<%= tinymce_assets %>
+<%= tinymce %>
+
+
+<script type="text/javascript">
+    function hideLists(){
+    
+    }
+$(document).ready(function(){
+        $('.partial').hide();
+
+        $('#sent-campaign').click(function(){
+            $(this).button('loading');    
+        });
+
+        $("input[name='people_list[type]']").change(function(){
+            $('.partial').hide();
+            var val = $(this).val();
+
+            if(val == 'PeopleList'){
+                $('#consumers.partial').show();
+            } else if(val == 'PeopleListBond') {
+                $('#bonds.partial').show();
+            } else if(val == 'PeopleListInterest'){
+                $('#interests.partial').show();
+            }
+        });
+
+	$('textarea').tinymce({
+		height: 600,
+		plugins: ['image','link'],
+		toolbar: 'bold italic | undo redo | fontsizeselect | fontselect | sizeselect | link image| alignleft aligncenter alignright alignjustify',
+		theme : "modern",
+    	theme_advanced_fonts : "Arial=arial,helvetica,sans-serif;Courier New=courier new,courier,monospace;AkrutiKndPadmini=Akpdmi-n",
+		font_size_style_values: "12px,13px,14px,16px,18px,20px",
+     	theme_modern_font_sizes: ["6px,7px,8px,9px,10px,11px,12px,13px,14px,15px,16px,17px,18px,19px,20px,21px,22px,23px,24px,25px,26px,27px,28px,29px,30px,31px,32px,36px,38px,40px"],
+     	fontsize_formats: "6pt 8pt 10pt 12pt 14pt 16pt 18pt 20pt 26pt 36pt 40pt 48pt"
+	});
+    
+        $('#sidebar').css('height','420px');
+
+        $('#new_marketing_campaign').submit(function(){
+            content = tinyMCE.activeEditor.getContent({format : 'raw'});    
+            $('#marketing_campaign_email_content').val(content);
+        });
+    });
+
+function openTemplate(template_id){
+    tinyMCE.activeEditor.focus();
+    $.getJSON("<%= get_email_templates_path %>?id="+template_id, function(data){
+            tinyMCE.activeEditor.setContent(data.content);
+    });
+
+}
+</script>
+
+
+<div id="create_wrapper">
+
+<div id="sidebar">
+    <% @templates.each do |template| %>
+        <div class='well'>
+        <%= link_to template.name,'javascript:void(0)',onclick:" openTemplate(#{template.id})" %>
+        </div>
+    <% end %>
+</div>
+
+<div id="content-wrapper" >
+
+    <%= form_for @campaign,url: marketing_campaigns_path,method: 'post',:html => { :class => 'form-horizontal' } do |f| %>
+
+    <div class='form-group'>
+        <%= f.label :title, "Assunto do email" %>
+        <div class='form-control-wrapper'>
+            <%= f.text_field :title,class: 'form-control' %>
+        </div>
+    </div>
+
+      <%= f.text_area :email_content, :class => "tinymce" %>
+
+
+<!--
+      
+-->
+        <%= fields_for :people_list do |p| %>
+            <br />
+            <br />
+            <div class='jumbotron'>
+                <h2>Tipos de destinatários</h2>
+                <%= p.collection_radio_buttons :type, [['PeopleList', 'Lista de pessoas'],['PeopleListBond','Vinculos'],['PeopleListInterest','Interesses']], :first,:last do |b| %>
+                    <div class='radio radio-primary'>
+                        <%= b.label { b.radio_button + b.text } %>
+                    </div>
+                <% end %>
+            </div>
+        <div id='choice-wrapper'>
+            <div class='partial' id='consumers'>
+                <%= render partial: 'marketing_campaigns/forms/choice_consumers', :locals => { :p  => p} %>    
+            </div>
+            <div class='partial' id='bonds'>
+                <%= render partial: 'marketing_campaigns/forms/choice_bonds', :locals => { :p  => p} %>    
+            </div>
+            <div class='partial' id='interests'>
+                <%= render partial: 'marketing_campaigns/forms/choice_interests', :locals => { :p  => p} %>    
+            </div>
+        </div>
+
+
+        <% end %>
+
+             <%= f.submit 'Enviar campanha',class: 'btn btn-info',id: 'sent-campaign',data: { :loading_text => "Salvando e enviando campanha.." } %>
+      <%= f.hidden_field :type, :value => "MarketingCampaignEmail"%>
+<% end %>
+
+</div>
+
+
+</div>
+
+
+

@@ -1,0 +1,53 @@
+<div id='campaigns_wrapper'>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+                <h3 class="panel-title" style="display:inline-block;">Campanhas SMS</h3>
+                <%= link_to 'criar campanha de sms',new_sms_marketing_campaigns_path,class: 'btn btn-flat btn-default withripple' %>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover" >
+            <thead>
+                    <tr>
+                        <th>Criado em</th>
+                        <th>Titulo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                    <% @sms_campaigns.each do |camp| %>
+                        <tr>
+                                <td><%= to_date camp.created_at %></td>
+                                <td><%= camp.title %></td>
+                                <td></td>
+                        </tr>
+                    <% end %>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+	        <h3 class='panel-title'>Campanhas de Email</h3>
+            <%= link_to 'criar campanha de email',new_email_marketing_campaigns_path,class: 'btn btn-flat btn-default withripple' %>
+        </div>
+        <div class='panel-body'>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Criado em</th>
+                        <th>Titulo</th>
+                        <th>Destinatarios</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                    <% @mail_campaigns.each do |camp| %>
+                        <tr>
+                            <td><%= to_date camp.created_at %></td>
+                            <td><%= camp.title %></td>
+                            <td><%= camp.people_list.sents_count if camp.people_list.present? %></td>
+
+                            <td></td>
+                        </tr>
+                    <% end %>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<h5>Lista de Vinculos</h5>
+    <%= p.collection_radio_buttons :bond_id, Bond.all, :id, :name do |b| %>
+         <div class='radio radio-primary'>
+                <%= b.label { b.radio_button + b.text } %>
+         </div>
+    <% end %>

@@ -1,0 +1,6 @@
+<h5>Lista de Interesses</h5>
+    <%= p.collection_radio_buttons :interest_id, Interest.all, :id, :name do |b| %>
+         <div class='radio radio-primary'>
+                <%= b.label { b.radio_button + b.text } %>
+         </div>
+    <% end %>

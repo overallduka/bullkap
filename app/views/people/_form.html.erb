@@ -1,0 +1,73 @@
+<script type="text/javascript">
+  
+  $(document).ready(function(){
+    $("#person_phone_number,#person_cell_number").focus(function () {
+      $(this).mask("(99) 9999-9999?9");
+    });
+
+    $("#person_phone_number,#person_cell_number").focusout(function () {
+      var phone, element;
+      element = $(this);
+      element.unmask();
+      phone = element.val().replace(/\D/g, '');
+      if (phone.length > 10) {
+      element.mask("(99) 99999-999?9");
+      } else {
+      element.mask("(99) 9999-9999?9");
+      }
+   });
+
+  })
+</script>
+
+<%= form_for(@person) do |f| %>
+  <% if @person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+      <ul>
+      <% @person.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="form-control-wrapper">
+      <%= f.label :name,class: 'right inline' %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+
+      <%= f.label :email,class: 'right inline' %><br>
+      <%= f.text_field :email, class: 'form-control'  %>
+
+      <%= f.label :phone_number,'Telefone',class: 'right inline' %><br>  
+      <%= f.text_field :phone_number, class: 'form-control'  %>
+
+
+      <%= f.label :cell_number,'Celular',class: 'right inline' %>
+      <%= f.text_field :cell_number, class: 'form-control' %>
+
+      <%= f.label :bond_id,'Vínculo',class: 'right inline' %><br>
+
+      <%= f.select :bond_id, Bond.all.map { |bond| [bond.name, bond.id] } %>
+      <br >
+
+      <%= f.label :instagram,class: 'right inline' %>
+      <%= f.text_field :instagram, class: 'form-control' %>
+
+      <%= f.label :twitter,class: 'right inline' %><br>
+      <%= f.text_field :twitter, class: 'form-control' %>
+
+      <%= f.label :facebook,'Facebook',class: 'right inline' %><br>  
+      <%= f.text_field :facebook, class: 'form-control' %>
+  </div>
+
+
+
+ 
+  <div class="actions">
+    <%= f.submit 'Cadastrar',class: 'btn btn-default' %>
+  </div>
+<% end %>
