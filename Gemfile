@@ -40,6 +40,15 @@ gem 'spring',        group: :development
 
 gem 'devise'
 
+gem 'roo'
+gem 'rubyzip', '< 1.0.0'
+gem 'spreadsheet'
+gem "simple-spreadsheet"
+gem 'google-spreadsheet-ruby'
+
+
+gem 'remote_table'
+
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
@@ -54,6 +63,8 @@ gem 'tinymce-rails'
 gem 'jquery-turbolinks'
 
 gem 'twilio-ruby', '~> 3.12'
+
+gem "simple-spreadsheet"
 
 group :development, :test do
 	gem 'rspec-rails', '>= 3.0.0'

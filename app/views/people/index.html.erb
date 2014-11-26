@@ -1,4 +1,39 @@
 <%= link_to 'criar', new_person_path,class: 'btn btn-success' %>
+<%= link_to 'ler arquivo xlsx','javascript:void(0)', class: 'btn btn-success',id: 'read_xls' %>
+<%= file_field_tag 'file_xls', accept: 'xls,xlsx' %>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+    $('#read_xls').click(function(){
+        $('#file_xls').click();    
+    });
+
+    $('#file_xls').change(function(){
+        var ext = $(this).val().split('.')[1];
+        if(ext != 'xls' && ext != 'xlsx'){
+            alert('Arquivo de formato invalido, somente arquivos xls ou xlsx');
+            $(this).val('');
+        } else {
+            var formData = new FormData();
+            formData.append('file', $(this)[0].files[0]);
+            $.ajax({
+                type: 'POST',
+                url: 'people/read_xls',
+                dataType: 'json',
+                processData : false,
+               processData: false,  // tell jQuery not to process the data
+               contentType: false,  // tell jQuery not to set contentType
+                data: formData,
+                //authenticity_token: '<%= form_authenticity_token %>'
+                success: function(data){
+                  console.log(data);
+                  alert('Foram inseridos '+data.count+' pessoas');
+                }
+            });
+        }
+    });
+});
+</script>
+
 <table class='table table-hover'>
   <thead>
     <tr>

@@ -1,6 +1,8 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
+  respond_to :html, :js
+
   # GET /people
   # GET /people.json
   def index
@@ -21,12 +23,44 @@ class PeopleController < ApplicationController
   def edit
   end
 
+  def read_xls
+    require 'remote_table'
+    xls = Roo::Excelx.new(params[:file].path,nil, :ignore)
+
+    #a = RemoteTable.new(b, format: :xlsx)
+    xls.default_sheet = xls.sheets.first
+    city = ''
+    courses = []
+    adds = 0
+    xls.first_row.upto(xls.last_row) do |i|
+
+      if xls.cell(i,1).present? && xls.cell(i,2).blank? && xls.cell(i,3).blank? && xls.cell(i,4).blank? # CITY
+        city = xls.cell(i,1)
+      elsif xls.cell(i,1).present? && xls.cell(i,1).downcase != 'nome' # PERSON
+        courses << xls.cell(i,4) if xls.cell(i,4).present? && courses.include?(xls.cell(i,4)) == false
+        person = Person.new(name: xls.cell(i,1), cell_number: xls.cell(i,2), email: xls.cell(i,3))
+        person.save(:validate => false)
+        adds += 1
+
+        in_courses = xls.cell(i,4).present? ? xls.cell(i,4).split('/') : []
+        in_courses = Interest.get_or_create(in_courses)
+        person.interests << in_courses
+
+      end
+
+    end
+    response = { :count => adds }
+    respond_with response
+
+
+  end
+
   # POST /people
   # POST /people.json
   def create
     @person = Person.new(person_params)
-    @person.phone_number = @person.phone_number.scan(/\d+/).join
-    @person.cell_number = @person.cell_number.scan(/\d+/).join
+    @person.phone_number = @person.phone_number.scan(/\d+/).join if @person.phone_number.present?
+    @person.cell_number = @person.cell_number.scan(/\d+/).join if @person.cell_number.present?
     respond_to do |format|
       if @person.save
         format.html { redirect_to @person, notice: 'Person was successfully created.' }

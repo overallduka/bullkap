@@ -1,7 +1,9 @@
 class Person < ActiveRecord::Base
 
 	has_and_belongs_to_many :interests
+    before_destroy { interests.clear }
 	has_and_belongs_to_many :people_lists
+    before_destroy { people_lists.clear }
 	belongs_to :bond
 
 	validates :phone_number, :presence => { :message => 'Telefone invalido'},
@@ -10,5 +12,6 @@ class Person < ActiveRecord::Base
     validates :cell_number, :presence => { :message => 'Telefone celular invalido'},
                      :numericality => true,
                      :length => { :minimum => 10, :maximum => 11 }
+
 
 end

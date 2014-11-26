@@ -41,6 +41,7 @@ RSpec.describe MarketingCampaignsController, :type => :controller do
 	end
 
 	describe "POST create" do
+=begin   
 		before do
 			sign_in user
 		end
@@ -50,7 +51,7 @@ RSpec.describe MarketingCampaignsController, :type => :controller do
             expect(MarketingCampaign.all.count).to eq(1)
         end
 
-=begin    
+ 
         it "create a sms marketing campaign" do
                 expect {
             post :create, { :marketing_campaign => { title: "alguma coisa",sms_content: "algo 3",type: "MarketingCampaignSms",people_list: people: [FactoryGirl.create(:person).id ] }}

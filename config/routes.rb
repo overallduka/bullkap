@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
   resources :bonds
 
-  resources :people
+  resources :people do
+        collection do
+          post :read_xls
+        end
+  end
 
   resources :interests
   resources :marketing_campaigns do
