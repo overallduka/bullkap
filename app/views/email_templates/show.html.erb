@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<h2><%= @email_template.name %></h2>
+<h4>Conteúdo</h4>
+<br />
+<%= raw(@email_template.content) %>
+
+<%= link_to 'Edit', edit_email_template_path(id: @email_template.id) %> |
+<%= link_to 'Back', email_templates_path %>

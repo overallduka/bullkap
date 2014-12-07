@@ -1,0 +1,35 @@
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+  	$('textarea').tinymce({
+		height: 600,
+		plugins: ['image','link'],
+		toolbar: 'bold italic | undo redo | fontsizeselect | fontselect | sizeselect | link image| alignleft aligncenter alignright alignjustify',
+		theme : "modern",
+    	theme_advanced_fonts : "Arial=arial,helvetica,sans-serif;Courier New=courier new,courier,monospace;AkrutiKndPadmini=Akpdmi-n",
+		font_size_style_values: "12px,13px,14px,16px,18px,20px",
+     	theme_modern_font_sizes: ["6px,7px,8px,9px,10px,11px,12px,13px,14px,15px,16px,17px,18px,19px,20px,21px,22px,23px,24px,25px,26px,27px,28px,29px,30px,31px,32px,36px,38px,40px"],
+     	fontsize_formats: "6pt 8pt 10pt 12pt 14pt 16pt 18pt 20pt 26pt 36pt 40pt 48pt"
+	});
+    
+        $('#sidebar').css('height','420px');
+
+        $('#new_marketing_campaign').submit(function(){
+            content = tinyMCE.activeEditor.getContent({format : 'raw'});    
+            $('#marketing_campaign_email_content').val(content);
+        });    
+});
+</script>
+
+<%= form_for @email_template do |f| %>
+
+  <div class='form-group'>
+    <%= f.label :name, "Nome do template" %>
+    <div class='form-control-wrapper'>
+        <%= f.text_field :name,class: 'form-control' %>
+    </div>
+  </div>
+
+  <%= f.text_area :content, :class => "tinymce" %>
+  <%= f.submit 'Atualizar template' %>
+
+<% end %>
