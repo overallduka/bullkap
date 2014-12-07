@@ -4,7 +4,7 @@ class InterestsController < ApplicationController
   # GET /interests
   # GET /interests.json
   def index
-    @interests = Interest.all
+    @interests = Interest.all.order(:name)
   end
 
   # GET /interests/1

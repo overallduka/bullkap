@@ -8,7 +8,7 @@ class EmailTemplatesController < ApplicationController
   def create
     @email_template = EmailTemplate.new email_template_params
     @email_template.save
-    redirect_to email_templates_path
+    redirect_to email_template_path @email_template
   end
 
   def show
@@ -32,6 +32,12 @@ class EmailTemplatesController < ApplicationController
     @template = EmailTemplate.find(params[:id])
     @template.update_attributes(email_template_params)
     redirect_to email_templates_path
+  end
+
+  def destroy
+    @email_template = EmailTemplate.find(params[:id])    
+    @email_template.destroy
+    redirect_to email_templates_path, notice: 'Template excluido com sucesso'
   end
 
     

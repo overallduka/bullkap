@@ -34,3 +34,12 @@
 table {
 	width:100%;
 }
+
+.pagination {
+  .btn {
+    padding:5px 10px;
+  }
+  .current {
+    font-weight:600;
+  }
+}

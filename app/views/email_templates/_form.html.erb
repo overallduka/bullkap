@@ -28,8 +28,8 @@ $(document).ready(function(){
         <%= f.text_field :name,class: 'form-control' %>
     </div>
   </div>
-
+  <%= f.label :name, "Conteúdo" %>  
   <%= f.text_area :content, :class => "tinymce" %>
-  <%= f.submit 'Atualizar template' %>
+  <%= f.submit 'Enviar', class: 'btn' %>
 
 <% end %>

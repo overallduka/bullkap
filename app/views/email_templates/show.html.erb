@@ -1,8 +1,9 @@
-<p id="notice"><%= notice %></p>
-<h2><%= @email_template.name %></h2>
-<h4>Conteúdo</h4>
+<%= link_to 'Editar', edit_email_template_path(id: @email_template.id), class: 'btn-sm btn-info' %>
+<%= link_to 'Voltar', email_templates_path, class: 'btn-sm btn-info' %>
 <br />
+<p id="notice"><%= notice %></p>
+<%= label_tag 'Nome:' %>
+<h2><%= @email_template.name %></h2>
+<%= label_tag 'Conteúdo:' %>
 <%= raw(@email_template.content) %>
 
-<%= link_to 'Edit', edit_email_template_path(id: @email_template.id) %> |
-<%= link_to 'Back', email_templates_path %>

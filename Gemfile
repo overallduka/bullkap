@@ -66,6 +66,8 @@ gem 'twilio-ruby', '~> 3.12'
 
 gem "simple-spreadsheet"
 
+gem 'kaminari'
+
 group :development, :test do
 	gem 'rspec-rails', '>= 3.0.0'
 	gem 'factory_girl_rails'
