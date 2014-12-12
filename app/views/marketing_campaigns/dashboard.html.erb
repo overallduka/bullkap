@@ -1,28 +1,31 @@
 
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<%= javascript_include_tag "vendor/charts/google_chart.js" %>
 
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
+      google.loader.ServiceBase = 'https://www.google.com/uds';
+      google.loader.GoogleApisBase = 'https://ajax.googleapis.com/ajax';
 
+      <% credits_have = current_user.credits.to_f-@spent_credit.round(2) %>      
 
-      function drawChart() {
-        var have = <%= current_user.credits.to_i-@spent_credit.round(2) %>;
-        var spent =  <%= @spent_credit.round(2) %>;
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Credits Count'],
-          ['Crédito restante (R$ '+have+')', have],
-          ['Crédito gasto (R$ '+spent+')', spent]
-        ]);
+          function drawChart() {
+            var have = <%= credits_have %>;
+            var spent =  <%= @spent_credit.round(2) %>;
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Credits Count'],
+              ['Crédito restante (R$ '+have+')', have],
+              ['Crédito gasto (R$ '+spent+')', spent]
+            ]);
 
-        var options = {
-          title: 'Créditos restantes'
-        };
+            var options = {
+              title: 'Créditos restantes'
+            };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-        chart.draw(data, options);
-        }
+            chart.draw(data, options);
+          }
 
 
 
@@ -50,7 +53,11 @@
          <h3>Dados desse mês</h3>
         <ul>
             <li>
+            <% if credits_have >= 0 %>
                 <div id="piechart" style="width: 500px; height: 300px;"></div>
+            <% else %>
+                <p>Você possui créditos negativos de <%= credits_have %></p>
+            <% end %>
             </li>
             <li>
                  <div id="piechart-1" style="width: 500px; height: 300px;"></div>

@@ -50,8 +50,10 @@ class PeopleController < ApplicationController
       end
 
     end
+
     response = { :count => adds }
     respond_to do |format|
+      format.js
       format.json { render response }
     end
 

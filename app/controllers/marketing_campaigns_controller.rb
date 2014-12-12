@@ -2,9 +2,9 @@ class MarketingCampaignsController < ApplicationController
 
 	def dashboard
         spent_sms = MarketingCampaignSms.last_month.sum(:sents_count)
-        spent_sms = spent_sms*0.14
+        spent_sms = spent_sms*Settings.prices.sms
         spent_email = MarketingCampaignEmail.last_month.sum(:sents_count)
-        spent_email = spent_email*0.05
+        spent_email = spent_email*Settings.prices.email
         @spent_credit = spent_sms+spent_email
         @sent_sms_count = MarketingCampaignSms.last_month.count
         @sent_email_count = MarketingCampaignEmail.last_month.count
@@ -40,12 +40,19 @@ class MarketingCampaignsController < ApplicationController
             campaign.sents_count = people_list.people.count
             campaign.people_list_id = people_list.id
             campaign.save
-            flash[:notice] = 'Campanha criada e enviada com sucesso'
         else
             flash[:alert] = campaign.errors.full_messages.to_sentence
         end
-            campaign.sent    
-        redirect_to marketing_campaigns_path
+        
+        campaign.user = current_user
+        if campaign.sent    
+          flash[:notice] = 'Campanha enviada com sucesso'
+        else
+          flash[:alert] = 'Você não possui saldo suficiente para enviar campanhas'
+        end
+
+        redirect_to marketing_campaigns_path          
+
 	end
 
 	private

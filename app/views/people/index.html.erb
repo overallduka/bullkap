@@ -18,8 +18,7 @@ $(document).ready(function(){
             $.ajax({
               type: 'POST',
               url: 'people/read_xls',
-              dataType: 'json',
-              processData : false,
+              dataType: 'js',
               processData: false,  // tell jQuery not to process the data
               contentType: false,  // tell jQuery not to set contentType
               data: formData,

@@ -3,9 +3,7 @@
 
 
 <script type="text/javascript">
-    function hideLists(){
-    
-    }
+
 $(document).ready(function(){
         $('.partial').hide();
 
@@ -26,6 +24,28 @@ $(document).ready(function(){
             }
         });
 
+
+    
+        $('#sidebar').css('height','420px');
+
+        $('#new_marketing_campaign').submit(function(){
+            content = tinyMCE.activeEditor.getContent({format : 'raw'});    
+            $('#marketing_campaign_email_content').val(content);
+        });
+        addTinyMCE();
+});
+
+function openTemplate(template_id){
+  if(tinyMCE.activeEditor == null){
+    addTinyMCE();
+  }
+  tinyMCE.activeEditor.focus();
+  $.getJSON("<%= get_email_templates_path %>?id="+template_id, function(data){
+    tinyMCE.activeEditor.setContent(data.content);
+  });
+}
+
+function addTinyMCE(){
 	$('textarea').tinymce({
 		height: 600,
 		plugins: ['image','link'],
@@ -36,21 +56,6 @@ $(document).ready(function(){
      	theme_modern_font_sizes: ["6px,7px,8px,9px,10px,11px,12px,13px,14px,15px,16px,17px,18px,19px,20px,21px,22px,23px,24px,25px,26px,27px,28px,29px,30px,31px,32px,36px,38px,40px"],
      	fontsize_formats: "6pt 8pt 10pt 12pt 14pt 16pt 18pt 20pt 26pt 36pt 40pt 48pt"
 	});
-    
-        $('#sidebar').css('height','420px');
-
-        $('#new_marketing_campaign').submit(function(){
-            content = tinyMCE.activeEditor.getContent({format : 'raw'});    
-            $('#marketing_campaign_email_content').val(content);
-        });
-    });
-
-function openTemplate(template_id){
-    tinyMCE.activeEditor.focus();
-    $.getJSON("<%= get_email_templates_path %>?id="+template_id, function(data){
-            tinyMCE.activeEditor.setContent(data.content);
-    });
-
 }
 </script>
 
@@ -75,9 +80,9 @@ function openTemplate(template_id){
             <%= f.text_field :title,class: 'form-control' %>
         </div>
     </div>
-
       <%= f.text_area :email_content, :class => "tinymce" %>
-
+      <small>Se o editor não carregar <%= link_to "clique aqui", 'javascript:void(0)',onclick: 'addTinyMCE()'  %> </small>
+      
 
 <!--
       
