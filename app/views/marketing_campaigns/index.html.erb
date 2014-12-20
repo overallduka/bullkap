@@ -19,7 +19,7 @@
                                 <td><%= to_date camp.created_at %></td>
                                 <td><%= camp.title %></td>
                                 <td><%= camp.sents_count %></td>
-                                <td></td>
+                                <td><%= link_to 'Excluir',marketing_campaign_path(camp.id), method: :delete, data: { confirm: 'Você tem certeza que deseja excluir essa campanha ?' }, class: 'btn-sm btn-warning' %></td>
                         </tr>
                     <% end %>
             </table>
@@ -47,7 +47,7 @@
                             <td><%= camp.sents_count %></td>
                             <td><%= camp.people_list.sents_count if camp.people_list.present? %></td>
 
-                            <td></td>
+                            <td><%= link_to 'Excluir',marketing_campaign_path(camp.id), method: :delete, data: { confirm: 'Você tem certeza que deseja excluir essa campanha ?' },class: 'btn-sm btn-warning'  %></td>
                         </tr>
                     <% end %>
             </table>

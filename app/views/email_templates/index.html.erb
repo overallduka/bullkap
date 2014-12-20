@@ -11,7 +11,7 @@
   <tbody>
     <% @email_templates.each do |email_template| %>
       <tr>
-        <td>Nome</td>
+        <td><%= email_template.name %></td>
         <td><%= link_to 'Mostrar', email_template,class: 'btn-sm btn-info'  %></td>
         <td><%= link_to 'Editar', edit_email_template_path(email_template),class: 'btn-sm btn-info'  %></td>
         <td><%= link_to 'Excluir', email_template, method: :delete, data: { confirm: 'Are you sure?' },class: 'btn-sm btn-info'  %></td>

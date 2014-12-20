@@ -1,5 +1,5 @@
 class MarketingMailer < ActionMailer::Base
-  default from: "overallduka@hotmail.com"
+  default from: "ramonsl@gmail.com"
 
     def test(email)
         mail(to: email, subject: "Meu email teste")

@@ -55,6 +55,16 @@ class MarketingCampaignsController < ApplicationController
 
 	end
 
+    def show
+
+    end
+
+    def destroy
+      @campaign = MarketingCampaign.find(params[:id])
+      @campaign.destroy
+      redirect_to marketing_campaigns_path, notice: 'Campanha apagada com sucesso'
+    end
+
 	private
 
     def resolve_people_list(param)
