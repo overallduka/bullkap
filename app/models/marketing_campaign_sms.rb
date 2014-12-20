@@ -2,8 +2,8 @@ class MarketingCampaignSms < MarketingCampaign
 	
     def sent
       if have_balance?('sms',people_list.people.count)
-        account_sid = 'AC9dac1c967947df06a3d6cfc1b5e8eac8' 
-        auth_token = '4ae12ae1e27e2f3cb7f2a660a817d31d' 
+        account_sid = '///AC9dac1c967947df06a3d6cfc1b5e8eac8////' 
+        auth_token = '///4ae12ae1e27e2f3cb7f2a660a817d31d/////' 
  
         client = Twilio::REST::Client.new account_sid, auth_token
         sents = 0
