@@ -76,6 +76,7 @@ group :development, :test do
 	gem 'faker'
     gem 'pry'
     gem 'railroady'
+    gem 'quiet_assets'
 end
 
 group :production do

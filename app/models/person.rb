@@ -7,12 +7,13 @@ class Person < ActiveRecord::Base
    before_destroy { people_lists.clear }
    belongs_to :bond
 
-   validates :phone_number, :presence => { :message => 'Telefone invalido'},
-     :numericality => true,
-     :length => { :minimum => 10, :maximum => 11 }
-   validates :cell_number, :presence => { :message => 'Telefone celular invalido'},
-                     :numericality => true,
-                     :length => { :minimum => 10, :maximum => 11 }
+   # validates :phone_number, :presence => { :message => 'Telefone invalido'},
+   #   :numericality => true,
+   #   :length => { :minimum => 10, :maximum => 11 }
+   # validates :cell_number, :presence => { :message => 'Telefone celular invalido'},
+   #                   :numericality => true,
+   #                   :length => { :minimum => 10, :maximum => 11 }
+   validates_uniqueness_of :email, :cell_number
 
 
 end

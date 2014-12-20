@@ -25,14 +25,14 @@ class PeopleController < ApplicationController
   end
 
   def read_xls
-    require 'remote_table'
-    xls = Roo::Excelx.new(params[:file].path,nil, :ignore)
+    xls = Roo::Excelx.new(params[:file]['file'].tempfile.path,nil, :ignore)
 
-    #a = RemoteTable.new(b, format: :xlsx)
     xls.default_sheet = xls.sheets.first
     city = ''
     courses = []
     adds = 0
+    fails = 0
+
     xls.first_row.upto(xls.last_row) do |i|
 
       if xls.cell(i,1).present? && xls.cell(i,2).blank? && xls.cell(i,3).blank? && xls.cell(i,4).blank? # CITY
@@ -40,8 +40,11 @@ class PeopleController < ApplicationController
       elsif xls.cell(i,1).present? && xls.cell(i,1).downcase != 'nome' # PERSON
         courses << xls.cell(i,4) if xls.cell(i,4).present? && courses.include?(xls.cell(i,4)) == false
         person = Person.new(name: xls.cell(i,1), cell_number: xls.cell(i,2), email: xls.cell(i,3))
-        person.save(:validate => false)
-        adds += 1
+        if person.save
+          adds += 1
+        else
+          fails += 1
+        end
 
         in_courses = xls.cell(i,4).present? ? xls.cell(i,4).split('/') : []
         in_courses = Interest.get_or_create(in_courses)
@@ -51,12 +54,7 @@ class PeopleController < ApplicationController
 
     end
 
-    response = { :count => adds }
-    respond_to do |format|
-      format.js
-      format.json { render response }
-    end
-
+    redirect_to people_path, notice: "Inseridas #{adds} pessoas, #{fails} pessoas não foram inseridas por email ou celular repetidos"
 
   end
 

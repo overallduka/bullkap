@@ -160,6 +160,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    quiet_assets (1.0.3)
+      railties (>= 3.1, < 5.0)
     rack (1.6.0)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -309,6 +311,7 @@ DEPENDENCIES
   maskedinput-rails
   pg
   pry
+  quiet_assets
   railroady
   rails (= 4.2.0)
   rails_12factor
