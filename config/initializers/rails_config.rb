@@ -1,5 +1,9 @@
 module RailsConfig 
   PRICE_SMS = 0.14
   PRICE_EMAIL = 0.05
+  COUNTRY_CODE = '+55'
+  TWILLIO_ACCOUNT_PHONE = '+18554933390'
+  TWILLIO_ACCOUNT_SID = '///AC9dac1c967947df06a3d6cfc1b5e8eac8////' 
+  TWILLIO_ACCOUNT_TOKEN = '///4ae12ae1e27e2f3cb7f2a660a817d31d/////'
 end
 
