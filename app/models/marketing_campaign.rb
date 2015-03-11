@@ -11,20 +11,16 @@ class MarketingCampaign < ActiveRecord::Base
 
 
     def have_balance? tp, count
-      if tp == 'email'
-        user.credits > Settings.prices.email*count
-      elsif tp == 'sms'
-        user.credits > Settings.prices.sms*count
-      end        
+      user.credits > (count * price_by_type(tp))
     end
 
-    def update_credits tp, count
-      if tp == 'email'
-        credits = user.credits - (count*Settings.prices.email)
-      elsif tp == 'sms'
-        credits = user.credits - (count * Settings.prices.sms)
-      end
+    def reduce_credits tp, count
+      credits = user.credits - (count * price_by_type(tp))
       user.update_attribute(:credits,credits)
+    end
+
+    def price_by_type(tp)
+      RailsConfig.const_get("PRICE_#{tp.upcase}")
     end
 
 end
