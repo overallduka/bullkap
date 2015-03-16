@@ -5,6 +5,7 @@ class MarketingCampaignsController < ApplicationController
     spent_sms = spent_sms * RailsConfig.PRICE_SMS
     spent_email = MarketingCampaignEmail.last_month.sum(:sents_count)
     spent_email = spent_email * RailsConfig.PRICE_EMAIL
+    
     @spent_credit = spent_sms+spent_email
     @sent_sms_count = MarketingCampaignSms.last_month.count
     @sent_email_count = MarketingCampaignEmail.last_month.count
