@@ -1,2 +1,2 @@
 pt-BR:
-  hello: "Hello world"
+  campaign_sent: 'Campanha enviada, %{success} enviados com sucesso, %{fail} envios falharam'

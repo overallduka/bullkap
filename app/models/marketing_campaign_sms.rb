@@ -18,7 +18,7 @@ class MarketingCampaignSms < MarketingCampaign
                                        to: ac_cc+person.cell_number,
                                        body: sms_content)
       rescue => e
-        puts "Unable to sent: #{e}"
+        logger.info "Unable to sent: #{e} \nId: #{person.id} \nPerson: #{person.name} \nCell: #{person.cell_number} "
       else
         sents += 1
       end
@@ -26,9 +26,10 @@ class MarketingCampaignSms < MarketingCampaign
     end
 
     reduce_credits('sms',sents)
-    return "#{sents} sent, #{people_list.people.count-sents} not sent"
 
+    return I18n.t('campaign_sent', success: sents, fail: people_list.people.count-sents)
   end
+
 
 end
 
