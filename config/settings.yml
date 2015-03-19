@@ -1,0 +1,12 @@
+price_sms: 0.14
+price_email: 0.05
+country_code: '+xx'
+twillio:
+  phone: '+xxxxxxxxxxx'
+  account_cid: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' 
+  account_token: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' 
+amazon:
+  smtp_address: 'email-smtp.us-west-2.amazonaws.com'
+  smtp_username: 'xxxxxxxxxxxxxxxxxxxx'
+  smtp_password: 'xxxxxxxxxxxxxxxxxxxx'
+

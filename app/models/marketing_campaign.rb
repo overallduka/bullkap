@@ -20,7 +20,7 @@ class MarketingCampaign < ActiveRecord::Base
     end
 
     def price_by_type(tp)
-      RailsConfig.const_get("PRICE_#{tp.upcase}")
+      Settings.send("price_#{tp}")
     end
 
 end

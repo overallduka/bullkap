@@ -39,12 +39,12 @@ Rails.application.configure do
 
 config.action_mailer.delivery_method = :smtp
 config.action_mailer.smtp_settings = {
-:address => "email-smtp.us-west-2.amazonaws.com",
-:user_name => "AKIAIQIKNEPAV5JKOABA", 
-:password => "AqDT/K14jSUjLsa9Jd5RFvdSBr51Z7XUyQnoXKa5SAjJ",
-:authentication => :login,
-:enable_starttls_auto => true,
-:post => 465
+  :address => Settings.amazon_smtp_address,
+  :user_name => Settings.amazon_smtp_username, 
+  :password => Settings.amazon_smtp_password,
+  :authentication => :login,
+  :enable_starttls_auto => true,
+  :port => 465
 }
 
 

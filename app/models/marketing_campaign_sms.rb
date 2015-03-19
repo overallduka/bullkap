@@ -2,12 +2,12 @@ class MarketingCampaignSms < MarketingCampaign
 	
   def sent
 
-    return [false] if !have_balance?('sms', people_list.people.count)
+    return false if !have_balance?('sms', people_list.people.count)
 
-    ac_sid = RailsConfig::TWILLIO_ACCOUNT_SID
-    ac_token = RailsConfig::TWILLIO_ACCOUNT_TOKEN
-    ac_phone = RailsConfig::TWILLIO_ACCOUNT_PHONE
-    ac_cc = RailsConfig::COUNTRY_CODE
+    ac_sid = Settings.twillio.account_sid
+    ac_token = Settings.twillio.account_token
+    ac_phone = Settings.twillio.phone
+    ac_cc = Settings.twillio.country_code
 
     client = Twilio::REST::Client.new(ac_sid, ac_token)
     sents = 0
@@ -26,7 +26,7 @@ class MarketingCampaignSms < MarketingCampaign
     end
 
     reduce_credits('sms',sents)
-    [true, "#{sents} sent, #{people_list.people.count-sents} not sent"]
+    return "#{sents} sent, #{people_list.people.count-sents} not sent"
 
   end
 

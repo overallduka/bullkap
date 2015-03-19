@@ -85,12 +85,12 @@ Rails.application.configure do
 config.action_mailer.delivery_method = :smtp
 
 config.action_mailer.smtp_settings = {
-  :address => RailsConfig.AMAZON_SMTP_ADDRESS,
-  :user_name => RailsConfig.AMAZON_SMTP_USERNAME,
-  :password => RailsConfig.AMAZON_SMTP_PASSWORD,
+  :address => Settings.amazon_smtp_address,
+  :user_name => Settings.amazon_smtp_username, 
+  :password => Settings.amazon_smtp_password,
   :authentication => :login,
   :enable_starttls_auto => true,
-  :post => 465
+  :port => 465
 }
 
 

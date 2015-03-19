@@ -4,7 +4,7 @@ class MarketingCampaignEmail < MarketingCampaign
         if have_balance?('email',people_list.people.count)
           MarketingMailer.sent_campaign(email_content, people_list.people, nil, title)    
           reduce_credits('email', people_list.people.count)
-          true
+          I18n.t('hello')
         else
           false
         end

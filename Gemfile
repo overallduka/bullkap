@@ -71,15 +71,16 @@ gem 'kaminari'
 gem "rails_config"
 
 group :development, :test do
-	gem 'rspec-rails', '>= 3.0.0'
-	gem 'factory_girl_rails'
-	gem 'faker'
-    gem 'pry'
-    gem 'railroady'
-    gem 'quiet_assets'
+  gem 'better_errors'
+  gem 'rspec-rails', '>= 3.0.0'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'pry'
+  gem 'railroady'
+  gem 'quiet_assets'
 end
 
 group :production do
-      gem 'rails_12factor'
+  gem 'rails_12factor'
 end
 
