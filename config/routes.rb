@@ -1,25 +1,30 @@
 Rails.application.routes.draw do
    
-    
-    resources :email_templates do
-        collection do
-            get :get
-        end
-    end
+  get 'dashboard' => 'marketing_campaigns#dashboard'
+  get 'setup' => 'setup#index', as: 'setup'
+  post 'setup' => 'setup#create', as: 'setup_create'
 
   resources :bonds
+  resources :interests
 
   resources :people do
-        collection do
-          post :read_xls
-        end
+    collection do
+      post :read_xls
+    end
   end
 
-  resources :interests
+  resources :email_templates do
+    collection do
+        get :get
+    end
+  end
+
+
   resources :marketing_campaigns do
     collection do
       get :new_sms
       get :new_email
+      get :dashboard
     end
   end
 

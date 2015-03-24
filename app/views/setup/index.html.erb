@@ -1,0 +1,71 @@
+<div class="jumbotron" style='display: inline-block;margin: 0 auto;'>
+    <h1><%= t('install') %></h1>
+    <p><%= t('install_explain') %></p>
+    <%= form_for setup_create_path do |f| %>
+       <div class='row'>
+         
+      <label for="config_price_sms" class="col-lg-3 control-label"><%= t('price_sms') %></label>
+      <div class="col-lg-9">
+        <%= f.text_field :config_price_sms, placeholder: '0.14', class: 'form-control' %>
+      </div>
+       </div>
+
+      <div class='row'>
+        <label for="config_price_email" class="col-lg-3 control-label"><%= t('price_email') %></label>
+        <div class="col-lg-9">
+          <%= f.text_field :config_price_email, placeholder: '0.05', class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class='row'>
+        <label for="config_country_code" class="col-lg-3 control-label"><%= t('country_code') %></label>
+        <div class="col-lg-9">
+          <%= f.text_field :config_country_code, placeholder: 'US', class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class='row'>
+        <label for="config_twillio_phone" class="col-lg-3 control-label"><%= t('twillio_phone') %></label>
+        <div class="col-lg-9">
+          <%= f.text_field :config_twillio_phone, placeholder: '+xxxxxxxxxxx', class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="config_twillio_account_cid" class="col-lg-3 control-label"><%= t('twillio_account_cid') %></label>
+        <div class="col-lg-9">
+          <%= f.text_field :config_twillio_account_cid, placeholder: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="config_twillio_account_token" class="col-lg-3 control-label"><%= t('twillio_account_token') %></label>
+        <div class="col-lg-9">
+          <%= f.text_field :config_twillio_account_token, placeholder: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="config_amazon_smtp_address" class="col-lg-3 control-label"><%= t('amazon_smtp_address') %></label>
+        <div class="col-lg-9">
+          <%= f.text_field :config_amazon_smtp_address, placeholder: 'email-smtp.us-west-2.amazonaws.com', class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="config_amazon_smtp_username" class="col-lg-3 control-label"><%= t('amazon_smtp_username') %></label>
+        <div class="col-lg-9">
+          <%= f.text_field :config_amazon_smtp_username, placeholder: 'xxxxxxxxxxxxxxxxxxxx', class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="config_amazon_smtp_password" class="col-lg-3 control-label"><%= t('amazon_smtp_password') %></label>
+        <div class="col-lg-9">
+          <%= f.text_field :config_amazon_smtp_password, placeholder: 'xxxxxxxxxxxxxxxxxxxx', class: 'form-control' %>
+        </div>
+      </div>
+
+      <p><%= f.submit t('init'), class: 'btn btn-primary btn-lg' %></p>
+    <% end %>
+</div>

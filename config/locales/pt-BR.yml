@@ -1,2 +1,6 @@
 pt-BR:
+  install: 'Instalação'
+  install_explain: 'Preencha os campos para definir a configuração padrão do aplicativo'
+  init: 'Iniciar'
+  price_sms: 'Preço do SMS'
   campaign_sent: 'Campanha enviada, %{success} enviados com sucesso, %{fail} envios falharam'
