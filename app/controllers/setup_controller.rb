@@ -1,14 +1,16 @@
 class SetupController < ApplicationController
   
-  skip_before_filter :authenticate_user!
+  skip_before_filter :authenticate_user!, :setup
 
   def index
+
   end
 
   def create
-    params.each do |k,v|
-      Setting.create(label: k, value: v) if k.match(/config/)
+    params[:setup].each do |k,v|
+      Setting.create(label: k, value: v) 
     end
+    redirect_to root_path
   end
 
 end

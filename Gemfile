@@ -46,7 +46,7 @@ gem 'spreadsheet'
 gem "simple-spreadsheet"
 gem 'google-spreadsheet-ruby'
 
-
+gem 'awesome_print'
 gem 'remote_table'
 
 gem "therubyracer"
